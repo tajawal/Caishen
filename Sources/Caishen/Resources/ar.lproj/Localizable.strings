@@ -1,0 +1,21 @@
+/* 
+  Localizable.strings
+  Pods
+
+  Created by Shiyuan Jiang on 4/6/16.
+
+*/
+
+"ACCESSORY_BUTTON_ACCESSIBILITY_LABEL" = "Accessory";
+
+"CARD_TYPE" = "نوع البطاقة";
+"CVC_TEXTFIELD_ACCESSIBILITY_LABEL" = "رمز الحماية";
+
+"INVALID_CARD_NUMBER" = "رقم البطاقة غير صحيح او غير فعال";
+"INVALID_EXPIRATION_DATE" = "البطاقة منتهية الصلاحية";
+
+"MONTH_INPUT_TEXTFIELD_ACCESSIBILITY_LABEL" = "شهر الانتهاء";
+
+"NUMBER_INPUT_TEXTFIELD_ACCESSIBILITY_LABEL" = "رقم البطاقة";
+
+"YEAR_INPUT_TEXTFIELD_ACCESSIBILITY_LABEL" = "سنة الانتهاء";

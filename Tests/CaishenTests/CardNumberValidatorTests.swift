@@ -63,16 +63,6 @@ class CardNumberValidatorTests: XCTestCase {
         "4556485551226429"
     ]
 
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-
     func testValidCards() {
         print("Validate Visa")
         self.validVisaNumbers.forEach({
