@@ -34,7 +34,7 @@ public protocol CardTypeImageStore {
 extension Bundle: CardTypeImageStore {
 
     open func image(for cardType: CardType) -> UIImage? {
-        return UIImage(named: cardType.name, in: self, compatibleWith: nil)
+        return UIImage(named: cardType.name, in: .module, compatibleWith: nil)
     }
 
     open func cvcImage(for cardType: CardType) -> UIImage? {
@@ -45,7 +45,7 @@ extension Bundle: CardTypeImageStore {
             cvcImageName = "CVC"
         }
 
-        return UIImage(named: cvcImageName, in: self, compatibleWith: nil)
+        return UIImage(named: cvcImageName, in: .module, compatibleWith: nil)
     }
 
 }
