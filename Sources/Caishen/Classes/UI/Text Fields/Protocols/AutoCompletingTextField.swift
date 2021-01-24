@@ -12,7 +12,7 @@ import Foundation
  A protocol to provide auto completion behavior of text.
  */
 protocol AutoCompletingTextField {
-    
+
     /**
      Returns the auto-completed text for the new text
      E.g. if user input a "4" in a monthInputTextField, it should show a string of "04" instead.

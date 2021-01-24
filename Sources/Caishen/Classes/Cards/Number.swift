@@ -21,7 +21,7 @@ public struct Number: RawRepresentable {
     public var length: Int {
         return rawValue.count
     }
-    
+
     public init(rawValue: String) {
         self.rawValue = rawValue
     }

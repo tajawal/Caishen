@@ -12,7 +12,7 @@ import UIKit
  *  The native supported card type of MasterCard
  */
 public struct MasterCard: CardType {
-    
+
     public let name = "MasterCard"
 
     public let CVCLength = 3
@@ -20,7 +20,7 @@ public struct MasterCard: CardType {
     public let identifyingDigits = Set(51...55).union(2221...2720)
 
     public init() {
-        
+
     }
 
 }

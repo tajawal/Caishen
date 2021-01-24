@@ -12,15 +12,15 @@ import UIKit
  *  The native supported card type of JCB, Japan Credit Bureau
  */
 public struct JCB: CardType {
-    
+
     public let name = "JCB"
-    
+
     public let CVCLength = 3
-    
+
     public let identifyingDigits = Set(3528...3589).union(Set([3088, 3096, 3112, 3158, 3337]) )
 
     public init() {
-        
+
     }
 
 }

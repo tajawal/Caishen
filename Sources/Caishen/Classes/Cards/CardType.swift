@@ -12,17 +12,17 @@ import Foundation
  A `CardType` is a predefined type for different bank cards. Examples include "Visa" or "American Express", each of which have slightly different formats for their payment card information. Card types are determined by the Issuer Identification Number (IIN) of a card number, which is equal to the first six digits of a card number.
  */
 public protocol CardType {
-    
+
     /**
      - returns: The card type name (e.g.: Visa, MasterCard, ...)
      */
     var name: String { get }
-    
+
     /**
      - returns: The number of digits expected in the Card Validation Code.
      */
     var CVCLength: Int { get }
-    
+
     /**
      The card number grouping is used to format the card number when typing in the card number text field.
      For Visa Card types for example, this grouping would be [4,4,4,4], resulting in a card number format like
@@ -30,7 +30,7 @@ public protocol CardType {
      - returns: The grouping of digits in the card number.
      */
     var numberGrouping: [Int] { get }
-    
+
     /**
      Card types are typically identified by their first n digits. In compliance to ISO/IEC 7812, the first digit is the *Major industry identifier*, which is equal to:
         - 1, 2 for airlines
@@ -61,7 +61,6 @@ public protocol CardType {
      */
     func validate(cvc: CVC) -> CardValidationResult
 
-    
     /** 
      A boolean flag that indicates whether CVC validation is required for this card type or not.
      Setting this value to false will hide the CVC text field from the `CardTextField` and remove the required validation routine.
@@ -106,15 +105,15 @@ public protocol CardType {
 }
 
 extension CardType {
-    
+
     public func isEqual(to cardType: CardType) -> Bool {
         return cardType.name == self.name
     }
-    
+
     public var requiresExpiry: Bool {
         return true
     }
-    
+
     public var requiresCVC: Bool {
         return true
     }
@@ -156,7 +155,7 @@ extension CardType {
         guard requiresExpiry else {
             return .Valid
         }
-        
+
         guard expiry != Expiry.invalid else {
             return .InvalidExpiry
         }
@@ -191,7 +190,7 @@ extension CardType {
         let digits = NSMutableArray(capacity: number.length)
         for i in 0..<number.length {
             // If the number is not long enough, fail the Luhn test
-            guard let digit = number.description[i,i+1] else {
+            guard let digit = number.description[i, i+1] else {
                 return CardValidationResult.LuhnTestFailed
             }
             digits.add(NSString(string: digit))
@@ -283,7 +282,7 @@ extension CardType {
      */
     public func numberIsNumeric(_ number: Number) -> CardValidationResult {
         for c in number.description {
-            if !["0","1","2","3","4","5","6","7","8","9"].contains(c) {
+            if !["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"].contains(c) {
                 return CardValidationResult.NumberIsNotNumeric
             }
         }

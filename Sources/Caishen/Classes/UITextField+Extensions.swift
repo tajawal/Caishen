@@ -20,4 +20,3 @@ internal extension UITextField {
         return "\u{202F}"
     }
 }
-

@@ -22,7 +22,7 @@ internal enum Localization: String {
     case InvalidCardNumber = "INVALID_CARD_NUMBER"
     case InvalidExpirationDate = "INVALID_EXPIRATION_DATE"
     case CardType = "CARD_TYPE"
-    
+
     /**
      - parameter textField: The text field whose accessibility label should be retreived.
      - parameter comment:   An optional comment for the localization.
@@ -43,7 +43,7 @@ internal enum Localization: String {
             return nil
         }
     }
-    
+
     /**
      - parameter comment: An optional comment for the localization.
      
@@ -56,4 +56,3 @@ internal enum Localization: String {
                                  comment: comment ?? "")
     }
 }
-

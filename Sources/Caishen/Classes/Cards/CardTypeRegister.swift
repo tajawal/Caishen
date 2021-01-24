@@ -10,15 +10,15 @@ import UIKit
 
 /// A `CardTypeRegister` is used to maintain the range of accepted card types. You can provide different card type registers for different CardTextField's and customize the range of accepted card types individually.
 open class CardTypeRegister {
-    
+
     /**
      The default card type register, shared among all CardTextFields.
      */
     public static let sharedCardTypeRegister = CardTypeRegister(registeredCardTypes: CardTypeRegister.defaultCardTypes)
-    
+
     /// An array of all registered card types. You can edit this array with `registerCardType`, `unregisterCardType` or `setRegisteredCardTypes`.
     open private(set) var registeredCardTypes: [CardType]
-    
+
     /**
      Creates a new `CardTypeRegister` that accepts no card types.
      */
@@ -46,7 +46,7 @@ open class CardTypeRegister {
             MasterCard(),
             Visa()
         ]
-    
+
     /**
      Adds the provided card type to the array of registered card types.
      
@@ -59,7 +59,7 @@ open class CardTypeRegister {
 
         registeredCardTypes.append(cardType)
     }
-    
+
     /**
      Removes the provided card type from the array of registered card types.
      
@@ -68,7 +68,7 @@ open class CardTypeRegister {
     open func unregister(cardType: CardType) {
         registeredCardTypes = registeredCardTypes.filter { !$0.isEqual(to: cardType) }
     }
-    
+
     /**
      Replaces the range of registered card types.
      
@@ -78,7 +78,7 @@ open class CardTypeRegister {
         registeredCardTypes = [CardType]()
         registeredCardTypes.append(contentsOf: cardTypes)
     }
-    
+
     /**
      Retreives a card type for a specific card number by parsing the Issuer Identification Numbers in the registered card types and matching them with the provided card number.
      
@@ -90,7 +90,7 @@ open class CardTypeRegister {
      */
     open func cardType(for number: Number) -> CardType {
         for i in (0...min(number.length, 6)).reversed() {
-            if let substring = number.rawValue[0,i], let substringAsNumber = Int(substring) {
+            if let substring = number.rawValue[0, i], let substringAsNumber = Int(substring) {
                 if let firstMatchingCardType = registeredCardTypes.filter({
                     $0.identifyingDigits.contains(substringAsNumber)
                 }).first {
@@ -98,7 +98,7 @@ open class CardTypeRegister {
                 }
             }
         }
-        
+
         return UnknownCardType()
     }
 

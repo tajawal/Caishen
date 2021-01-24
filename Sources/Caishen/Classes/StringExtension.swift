@@ -11,7 +11,7 @@ import Foundation
 extension String {
 
     //http://stackoverflow.com/a/30404532/1565974
-    
+
     /**
      Convenience method to retreive a substring of `self`.
      
@@ -28,7 +28,7 @@ extension String {
         let endIndex = self.index(self.startIndex, offsetBy: toExclusively)
         return String(self[startIndex..<endIndex])
     }
-    
+
     /**
      - returns: True if this string contains only digits.
      */

@@ -17,12 +17,12 @@ extension CardTextField: CardInfoTextFieldDelegate {
             select(textField, prefillText: nil)
         }
     }
-    
+
     open func textField(_ textField: UITextField, didEnterPartiallyValidInfo: String) {
         updateNumberColor()
         notifyDelegate()
     }
-    
+
     open func textField(_ textField: UITextField, didEnterOverflowInfo overFlowDigits: String) {
         updateNumberColor()
         select(textField, prefillText: overFlowDigits)
@@ -51,10 +51,10 @@ extension CardTextField: CardInfoTextFieldDelegate {
         guard let prefillText = prefillText else {
             return
         }
-        
-        _ = nextTextField?.delegate?.textField?(nextTextField!, shouldChangeCharactersIn: NSMakeRange(0, (nextTextField?.text ?? "").count), replacementString: prefillText)
+
+        _ = nextTextField?.delegate?.textField?(nextTextField!, shouldChangeCharactersIn: NSRange(location: 0, length: (nextTextField?.text ?? "").count), replacementString: prefillText)
     }
-    
+
     /**
      Updates the color of month and year text field based on whether or not the input into those text fields is valid or not.
      */

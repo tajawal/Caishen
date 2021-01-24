@@ -15,7 +15,7 @@ public struct Card {
 
     /// The card number that is shown on the user's card.
     public let bankCardNumber: Number
-    
+
     /**
      The card verification code for the user's card.
      
@@ -23,7 +23,7 @@ public struct Card {
      - important: CVCs that are validated by *Caishen* as `CardValidationResult.Valid` are not necessarily validated by the card issuer as well. In order to validate the CVC, you should opt for the integration of a [Payment Gateway](https://en.wikipedia.org/wiki/Payment_gateway) to validate the authenticity of the entered CVC.
      */
     public let cardVerificationCode: CVC
-    
+
     /**
      The card's expiry date as indicated on the payment card.
      

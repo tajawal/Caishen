@@ -12,9 +12,9 @@ import UIKit
  *  The native supported card type of American Express
  */
 public struct AmericanExpress: CardType {
-    
+
    public let name = "Amex"
-    
+
     public let CVCLength = 4
 
     public let numberGrouping = [4, 6, 5]

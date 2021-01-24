@@ -42,29 +42,29 @@ public struct Expiry: RawRepresentable {
         guard string.trimmingCharacters(in: CharacterSet.decimalDigits).count == 1 else {
             return nil
         }
-        
+
         let regex = try! NSRegularExpression(pattern: "^(\\d{1,2})[/|-](\\d{1,4})", options: .caseInsensitive)
         var monthStr: String = ""
         var yearStr: String = ""
-        
-        guard let match = regex.firstMatch(in: string, options: .reportProgress, range: NSMakeRange(0, string.count)) else {
+
+        guard let match = regex.firstMatch(in: string, options: .reportProgress, range: NSRange(location: 0, length: string.count)) else {
             return nil
         }
-        
+
         let monthRange = match.range(at: 1)
         if monthRange.length > 0, let range = Range(monthRange, in: string) {
             monthStr = String(string[range])
         } else {
             return nil
         }
-        
+
         let yearRange = match.range(at: 2)
         if yearRange.length > 0, let range = Range(yearRange, in: string) {
             yearStr = String(string[range])
         } else {
             return nil
         }
-        
+
         self.init(month: monthStr, year: yearStr)
     }
 
@@ -129,7 +129,7 @@ public struct Expiry: RawRepresentable {
 }
 
 extension Expiry: CustomStringConvertible {
-    
+
     public var description: String {
             return String(format: "%02i/%04i", arguments: [month, year])
     }
@@ -154,7 +154,7 @@ private func dateWith(month: UInt, year: UInt) -> Date? {
     if let components = gregorianCalendar.date(from: dateComponents) {
             let monthRange = gregorianCalendar.range(of: Calendar.Component.day,
                                                      in: Calendar.Component.month,
-                                                     for:components)
+                                                     for: components)
 
             dateComponents.day = monthRange?.count
             dateComponents.hour = 23

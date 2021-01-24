@@ -10,7 +10,7 @@ import UIKit
 
 /// A text field which can be used to enter years and provides validation.
 open class YearInputTextField: DetailInputTextField {
-    
+
     /**
      Checks the validity of the entered year.
      
@@ -20,11 +20,11 @@ open class YearInputTextField: DetailInputTextField {
         if partiallyValid && year.count == 0 {
             return true
         }
-        
+
         guard let yearInt = UInt(year) else {
             return false
         }
-        
+
         return yearInt >= 0 &&
             yearInt < 100 &&
             (partiallyValid || year.count == 2)

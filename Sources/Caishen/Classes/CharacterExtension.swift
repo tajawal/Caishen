@@ -9,7 +9,7 @@
 import Foundation
 
 extension Character {
-    
+
     /**
      - returns: Whether or not `self` is numeric.
      */

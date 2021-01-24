@@ -19,7 +19,7 @@ public protocol CardTypeImageStore {
      - returns: The image for the specified card type or nil, if no image was provided for this card type.
      */
     func image(for cardType: CardType) -> UIImage?
-    
+
     /**
      Provides an image for the CVC of a specific card type. The position of a CVC on a card may vary based on the card issuer, so that different card types may provide different images to indicate the location of the CVC on the card. This image will be shown in a `CardTextField`'s image view once the user starts entering the CVC.
      
@@ -44,7 +44,7 @@ extension Bundle: CardTypeImageStore {
         } else {
             cvcImageName = "CVC"
         }
-        
+
         return UIImage(named: cvcImageName, in: self, compatibleWith: nil)
     }
 

@@ -13,7 +13,7 @@ import UIKit
  */
 @objc
 public protocol CardInfoTextFieldDelegate {
-    
+
     /**
      Called whenever valid information was entered into `textField`.
      
@@ -21,7 +21,7 @@ public protocol CardInfoTextFieldDelegate {
      - parameter didEnterValidInfo: The valid information that was entered into `textField`.
      */
     func textField(_ textField: UITextField, didEnterValidInfo: String)
-    
+
     /**
      Called whenever partially valid information was entered into `textField`.
      
@@ -29,7 +29,7 @@ public protocol CardInfoTextFieldDelegate {
      - parameter didEnterPartiallyValidInfo: The partially valid information that was entered.
      */
     func textField(_ textField: UITextField, didEnterPartiallyValidInfo: String)
-    
+
     /**
      Called whenever more text was entered into `textField` than necessary. This can be used to provide this overflow as text in the next text field in the responder chain.
      

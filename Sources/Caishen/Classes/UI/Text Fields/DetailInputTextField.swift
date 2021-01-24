@@ -14,29 +14,29 @@ import UIKit
  The default implementation accepts any input.
  */
 open class DetailInputTextField: StylizedTextField, TextFieldValidation, AutoCompletingTextField {
-    
+
     open weak var cardInfoTextFieldDelegate: CardInfoTextFieldDelegate?
-    
+
     open func textFieldDidBeginEditing(_ textField: UITextField) {
         if (textField.text ?? "").isEmpty {
             textField.text = UITextField.emptyTextFieldCharacter
         }
     }
-    
+
     open override func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let newText = NSString(string: (textField.text ?? "")).replacingCharacters(in: range, with: string).replacingOccurrences(of: UITextField.emptyTextFieldCharacter, with: "")
-        
+
         let deletingLastCharacter = !(textField.text ?? "").isEmpty && textField.text != UITextField.emptyTextFieldCharacter && newText.isEmpty
         if deletingLastCharacter {
             textField.text = UITextField.emptyTextFieldCharacter
             cardInfoTextFieldDelegate?.textField(self, didEnterPartiallyValidInfo: newText)
             return false
         }
-        
+
         let autoCompletedNewText = autocomplete(newText)
-        
+
         let (currentTextFieldText, overflowTextFieldText) = split(autoCompletedNewText)
-        
+
         if isInputValid(currentTextFieldText, partiallyValid: true) {
             textField.text = currentTextFieldText
             if isInputValid(currentTextFieldText, partiallyValid: false) {
@@ -45,14 +45,14 @@ open class DetailInputTextField: StylizedTextField, TextFieldValidation, AutoCom
                 cardInfoTextFieldDelegate?.textField(self, didEnterPartiallyValidInfo: currentTextFieldText)
             }
         }
-        
+
         if !overflowTextFieldText.isEmpty {
             cardInfoTextFieldDelegate?.textField(self, didEnterOverflowInfo: overflowTextFieldText)
         }
-        
+
         return false
     }
-    
+
     open func prefill(_ text: String) {
         if isInputValid(text, partiallyValid: false) {
             self.text = text
@@ -77,7 +77,7 @@ open class DetailInputTextField: StylizedTextField, TextFieldValidation, AutoCom
     func autocomplete(_ text: String) -> String {
         return text
     }
-    
+
     private func split(_ text: String) -> (currentText: String, overflowText: String) {
         let hasOverflow = text.count > expectedInputLength
         let index = (hasOverflow) ?

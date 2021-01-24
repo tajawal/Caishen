@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 public protocol CardTextFieldDelegate: class {
-    
+
     /**
      Callback for a CardTextField, which is called whenever the entered Card information has changed.
      
@@ -19,7 +19,7 @@ public protocol CardTextFieldDelegate: class {
      - parameter validationResult: The result for the card validation of `information` or nil, if one or more of the CardTextField's text fields are empty or incomplete.
      */
     func cardTextField(_ cardTextField: CardTextField, didEnterCardInformation information: Card, withValidationResult validationResult: CardValidationResult)
-    
+
     /**
      Callback for a CardTextField, which is called to update the image for its accessory button.
      
@@ -27,7 +27,7 @@ public protocol CardTextFieldDelegate: class {
      - returns: An image for the CardTextField's accessory button.
      */
     func cardTextFieldShouldShowAccessoryImage(_ cardTextField: CardTextField) -> UIImage?
-    
+
     /**
      Callback for a CardTextField, which is used to check whether an accessory button should be provided.
      You can provide an arbitrary function which will be assigned to the text field's accessory button or nil, if you do not need an accessory button.
@@ -35,8 +35,8 @@ public protocol CardTextFieldDelegate: class {
      - parameter CardTextField: The text field requesting an action for its accessory button.
      - returns: Any action that is performed when the accessory button is tapped or nil, if no accessory button should be displayed in the text field.
      */
-    func cardTextFieldShouldProvideAccessoryAction(_ cardTextField: CardTextField) -> (() -> ())?
-    
+    func cardTextFieldShouldProvideAccessoryAction(_ cardTextField: CardTextField) -> (() -> Void)?
+
     /**
      Callback for a CardTextField, which is called to update the accessibility label of the accessory button
      

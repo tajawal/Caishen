@@ -10,7 +10,7 @@ import UIKit
 
 /// A text field which can be used to enter months and provides validation and auto completion.
 open class MonthInputTextField: DetailInputTextField {
-    
+
     /**
      Checks the validity of the entered month.
      
@@ -21,15 +21,15 @@ open class MonthInputTextField: DetailInputTextField {
         if partiallyValid && length == 0 {
             return true
         }
-        
+
         guard let monthInt = UInt(month) else {
             return false
         }
-        
-        if length == 1 && !["0","1"].contains(month) {
+
+        if length == 1 && !["0", "1"].contains(month) {
             return false
         }
-        
+
         return ((monthInt >= 1 && monthInt <= 12) ||
             (partiallyValid && month == "0")) &&
             (partiallyValid || length == 2)

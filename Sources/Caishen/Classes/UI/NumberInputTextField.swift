@@ -15,7 +15,7 @@ import UIKit
 open class NumberInputTextField: StylizedTextField {
 
     // MARK: - Variables
-    
+
     /**
      The card number that has been entered into this text field. 
      
@@ -25,16 +25,16 @@ open class NumberInputTextField: StylizedTextField {
         let textFieldTextUnformatted = cardNumberFormatter.unformat(cardNumber: text ?? "")
         return Number(rawValue: textFieldTextUnformatted)
     }
-    
+
     /**
      */
     @IBOutlet open weak var numberInputTextFieldDelegate: NumberInputTextFieldDelegate?
-    
+
     /**
      The string that is used to separate different groups in a card number.
      */
     @IBInspectable open var cardNumberSeparator: String = "-"
-    
+
     open override var accessibilityValue: String? {
         get {
             // In order to read digits of the card number one by one, return them as "4 1 1 ..." separated by single spaces and commas inbetween groups for pauses
@@ -58,10 +58,10 @@ open class NumberInputTextField: StylizedTextField {
                 + ": "
                 + cardTypeRegister.cardType(for: cardNumber).name
         }
-        
+
         set {  }
     }
-    
+
     /// Variable to store the text color of this text field. The actual property `textColor` (as inherited from UITextField) will change based on whether or not the entered card number was invalid and may be `invalidInputColor` in this case. In order to always set and retreive the actual text color for this text field, it is saved and retreived to and from this private property.
     private var _textColor: UIColor?
     override open var textColor: UIColor? {
@@ -79,26 +79,26 @@ open class NumberInputTextField: StylizedTextField {
      The card type register that holds information about which card types are accepted and which ones are not.
      */
     open var cardTypeRegister: CardTypeRegister = CardTypeRegister.sharedCardTypeRegister
-    
+
     /**
      A card number formatter used to format the input
      */
     private var cardNumberFormatter: CardNumberFormatter {
         return CardNumberFormatter(cardTypeRegister: cardTypeRegister, separator: cardNumberSeparator)
     }
-    
+
     // MARK: - UITextFieldDelegate
-    
+
     open override func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // Current text in text field, formatted and unformatted:
         let textFieldTextFormatted = NSString(string: textField.text ?? "")
         // Text in text field after applying changes, formatted and unformatted:
         let newTextFormatted = textFieldTextFormatted.replacingCharacters(in: range, with: string)
         let newTextUnformatted = cardNumberFormatter.unformat(cardNumber: newTextFormatted)
-        
+
         // Set the text color to invalid - this will be changed to `validTextColor` later in this method if the input was valid
         super.textColor = invalidInputColor
-        
+
         if !newTextUnformatted.isEmpty && !newTextUnformatted.isNumeric() {
             return false
         }
@@ -129,7 +129,7 @@ open class NumberInputTextField: StylizedTextField {
         } else if newValidation == .Valid {
             numberInputTextFieldDelegate?.numberInputTextFieldDidComplete(self)
         }
-        
+
         /// If the number is incomplete or valid, assume it's valid and show it in `textColor`
         /// Also, if the number is of unknown type and the full IIN has not been entered yet, assume it's valid.
         if (newValidation.contains(.UnknownType) && newTextUnformatted.count <= 6) || newValidation.contains(.NumberIncomplete) || newValidation == .Valid {
@@ -138,7 +138,7 @@ open class NumberInputTextField: StylizedTextField {
 
         return false
     }
-    
+
     /**
      Prefills the card number. The entered card number will only be prefilled if it is at least partially valid and will be displayed formatted.
      
@@ -149,7 +149,7 @@ open class NumberInputTextField: StylizedTextField {
         let cardNumber = Number(rawValue: unformattedCardNumber)
         let type = cardTypeRegister.cardType(for: cardNumber)
         let numberPartiallyValid = type.checkCardNumberPartiallyValid(cardNumber) == .Valid
-        
+
         if numberPartiallyValid {
             // Set text and apply text color changes if the prefilled card type is unknown
             self.text = text
@@ -159,9 +159,9 @@ open class NumberInputTextField: StylizedTextField {
                           replacementString: cardNumber.rawValue)
         }
     }
-    
+
     // MARK: - Helper functions
-    
+
     /**
      Computes the rect that contains the specified text range within the text field.
      
@@ -182,10 +182,10 @@ open class NumberInputTextField: StylizedTextField {
         guard let textRange = textField.textRange(from: rangeStart, to: rangeEnd) else {
             return nil
         }
-        
+
         return textField.firstRect(for: textRange)
     }
-    
+
     /**
      - precondition: This function will only work, when `self` is the first responder. If `self` is not first responder, `self.beginningOfDocument` will not be initialized and this function will return nil.
      
@@ -198,12 +198,12 @@ open class NumberInputTextField: StylizedTextField {
         guard let textLength = text?.count else {
             return nil
         }
-        
-        return rectFor(range: NSMakeRange(textLength - lastGroupLength, lastGroupLength), in: self)
+
+        return rectFor(range: NSRange(location: textLength - lastGroupLength, length: lastGroupLength), in: self)
     }
-    
+
     // MARK: Accessibility
-    
+
     /**
      Add an observer to listen to the event of UIAccessibilityAnnouncementDidFinishNotification, and then post an accessibility
      notification to user that the entered card number is not valid.
@@ -218,7 +218,7 @@ open class NumberInputTextField: StylizedTextField {
                                                          name: UIAccessibility.announcementDidFinishNotification,
                                                          object: nil)
     }
-    
+
     /**
      Notify user the entered card number is invalid when accessibility is turned on
      */

@@ -20,45 +20,45 @@ import UIKit
 */
 public struct CardValidationResult: OptionSet {
     public let rawValue: UInt64
-    
+
     public init(rawValue: UInt64) {
         self.rawValue = rawValue
     }
-    
+
     // MARK: - Default declarations
     public static let Valid                   = CardValidationResult([])
-    
+
     /** 
      Card number does not match the specified type or is too long.
      */
     public static let NumberDoesNotMatchType  = CardValidationResult(rawValue: 1 << 0)
-    
+
     /**
      Card number does match the specified type but is too short.
      - note: This result will be returned for an incompleted card number.
      */
     public static let NumberIncomplete        = CardValidationResult(rawValue: 1 << 1)
-    
+
     /**
      Invalid Card Verificaiton Code.
      */
     public static let InvalidCVC              = CardValidationResult(rawValue: 1 << 2)
-    
+
     /**
      The Card Verification Code is too short.
      */
     public static let CVCIncomplete           = CardValidationResult(rawValue: 1 << 3)
-    
+
     /**
      The card has already expired.
      */
     public static let CardExpired             = CardValidationResult(rawValue: 1 << 4)
-    
+
     /**
      Card number does not match the specified type or is too long.
      */
     public static let NumberIsNotNumeric      = CardValidationResult(rawValue: 1 << 5)
-    
+
     /**
      The Luhn test failed for the credit card number.
      - note: This result might be returned for an incompleted card number.

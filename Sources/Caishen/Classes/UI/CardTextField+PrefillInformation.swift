@@ -9,7 +9,7 @@
 import UIKit
 
 extension CardTextField {
-    
+
     /**
      Fills all form fields of this card text field with the information provided and moves to card detail, if the provided card number was valid.
      
@@ -24,27 +24,27 @@ extension CardTextField {
             if year > 100 {
                 trimmedYear = year % 100
             }
-            
+
             yearTextField?.prefill(String(format: "%02i", arguments: [trimmedYear]))
         }
-        
+
         if let month = month {
             monthTextField?.prefill(String(format: "%02i", arguments: [month]))
         }
-        
+
         if let cardNumber = number, let numberInputTextField = numberInputTextField {
             numberInputTextField.prefill(cardNumber)
-            
+
             // With a new card number comes a new card type - pass this card type to `cvcTextField`
             cvcTextField?.cardType = cardType
         }
-        
+
         if let cvc = cvc {
             cvcTextField?.prefill(cvc)
         }
 
         moveCardNumberOutAnimated(remainFirstResponder: isChildFirstResponder)
-        
+
         notifyDelegate()
     }
 }
